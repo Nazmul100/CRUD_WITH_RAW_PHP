@@ -10,9 +10,9 @@
             </a>
         </div>
     </div>
-    <table class="table table-striped table-hover ">
+    <table class="table table-striped table-hover text-center">
         <thead>
-        <tr class="col-2">
+        <tr >
             <th>ID</th>
             <th>Name</th>
             <th>Skill</th>
