@@ -1,4 +1,11 @@
-<?php require_once("./includes/header.php"); ?>
+<?php
+require_once("./includes/header.php");
+require_once("./db/Connection.php");
+?>
+<?php
+    $getData = new database();
+    $data = $getData->showAll();
+?>
 <div class="container">
     <div class="row mx-auto ">
         <div class="text-left col-sm-8">
@@ -12,6 +19,9 @@
     </div>
     <table class="table table-striped table-hover text-center">
         <thead>
+
+
+
         <tr >
             <th>ID</th>
             <th>Name</th>
@@ -21,45 +31,30 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="col-2">
-            <th scope="row">1</th>
-            <td>Nazmul</td>
-            <td>php</td>
-            <td>Bashundura</td>
-            <td >
-                <a href="edit.php" class="btn btn-primary a-btn-slide-text">
-                    <span class="edit" aria-hidden="true"></span>
-                    <i class="fas fa-user-edit"></i>
-                </a>
-                <a href="view.php" class="btn btn-success a-btn-slide-text">
-                    <span class="open" aria-hidden="true"></span>
-                    <i class="fas fa-eye"></i>
-                </a>
-                <a href="delete.php" class="btn btn-danger a-btn-slide-text">
-                    <span class="remove" aria-hidden="true"></span>
-                    <i class="far fa-trash-alt"></i>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">1</th>
-            <td>Nazmul</td>
-            <td>php</td>
-            <td>Bashundura</td>
-            <td>
-                <a href="edit.php" class="btn btn-primary a-btn-slide-text">
-                    <span class="edit" aria-hidden="true"></span>
-                    <i class="fas fa-user-edit"></i>
-                </a>
-                <a href="view.php" class="btn btn-success a-btn-slide-text">
-                    <span class="open" aria-hidden="true"></span>
-                    <i class="fas fa-eye"></i>
-                </a>
-                <a href="delete.php" class="btn btn-danger a-btn-slide-text">
-                    <span class="remove" aria-hidden="true"></span>
-                    <i class="far fa-trash-alt"></i>
-                </a>
-            </td>
+        <?php while ($row = mysqli_fetch_assoc($data)){ ?>
+            <tr class="col-2">
+                <th scope="row"><?php echo $row['id'] ?></th>
+                <td><?php echo $row['nickname'] ?></td>
+                <td><?php echo $row['user_skill'] ?></td>
+                <td><?php echo $row['user_address'] ?></td>
+                <td >
+                    <a href="edit.php?id=<?php echo $row['id']; ?>" class="btn btn-primary a-btn-slide-text">
+                        <span class="edit" aria-hidden="true"></span>
+                        <i class="fas fa-user-edit"></i>
+                    </a>
+                    <a href="view.php?id=<?php echo $row['id']; ?>" class="btn btn-success a-btn-slide-text">
+                        <span class="open" aria-hidden="true"></span>
+                        <i class="fas fa-eye"></i>
+                    </a>
+                    <a href="delete.php?id=<?php echo $row['id']; ?>" class="btn btn-danger a-btn-slide-text">
+                        <span class="remove" aria-hidden="true"></span>
+                        <i class="far fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+        <?php } ?>
+
+
 
         </tbody>
     </table>
