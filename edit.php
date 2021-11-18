@@ -10,16 +10,17 @@ $userInfo = mysqli_fetch_assoc($user);
 ?>
 
 <?php
-$username = $bio = $project = $address = $photo = $skill = "" ;
-if($_POST['Submit'] == "update")
-{
+$username = $bio = $project = $address = $skill = "" ;
+if($_POST['Submit'] == "update") {
     $username = $_POST['name'];
     $bio = $_POST['bio'];
     $project = $_POST['project'];
     $address = $_POST['address'];
-    $photo = $_POST['photo'];
+    $photo = $_FILES['photo'];
     $skill = $_POST['skill'];
+//    var_dump($photo);
     $UpdateData= $getData->Update($id,$username,$photo,$bio,$skill,$project,$address);
+//    var_dump($UpdateData);
 
     if ($UpdateData==1){
         header('location:index.php');
@@ -28,10 +29,8 @@ if($_POST['Submit'] == "update")
 
 ?>
 <div class="container">
-    <h2 class="text-lg-start"> Edit My Profile</h2>
-    <hr>
-    <div class="container">
-        <form action="" method="post">
+    <h2 class="text-sm-center"> Edit My Profile</h2>
+        <form action="" method="post" enctype="multipart/form-data">
 
 
             <div class="form-group mt-3">
@@ -69,11 +68,17 @@ if($_POST['Submit'] == "update")
 
             <div class="form-group mt-3">
                 <label for="exampleInputPhoto">Photo</label>
-                <input type="file" class="form-control" id="photo" name="photo" aria-describedby="nameHelp" placeholder="">
-            </div>
+                <input type="file" class="form-control" name="photo" required="">
 
+            </div>
 
             <button type="submit" name="Submit" value="update"  class="btn btn-primary mt-3">Submit</button>
         </form>
-    </div>
 </div>
+
+
+
+
+<?php
+require_once("./includes/footer.php");
+?>

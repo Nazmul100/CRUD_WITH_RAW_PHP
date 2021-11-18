@@ -10,3 +10,14 @@ if ($data==1){
 }
 
 ?>
+
+
+
+
+
+
+
+<?php
+require_once("./includes/footer.php");
+?>
+

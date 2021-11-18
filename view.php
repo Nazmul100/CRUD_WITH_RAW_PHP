@@ -7,13 +7,15 @@ require_once("./db/Connection.php");
     $id = $_GET['id'];
     $data = $getData->Display($id);
     $user = mysqli_fetch_assoc($data);
-//    print_r($user) ;
+
 ?>
 <div class="container">
     <div class="card mb-3">
-        <img src="./Images/images.jpeg"  class="rounded mx-auto d-block rounded-circle mt-3" alt="...">
+
+
+        <img src="./Images/<?php echo $user['user_photo'] ?>"  class="rounded mx-auto d-block rounded-circle mt-3"  alt="...">
         <div class="card-body">
-            <h5 class="card-title text-center"><?php echo $user['nickname'] ?></h5>
+            <h5 class="card-title text-center">Name:<?php echo $user['nickname'] ?></h5>
             <p class="card-text text-center">skill: <?php echo $user['user_skill']?></p>
             <p class="card-text text-center" ><small class="text-muted"> <?php echo $user['user_bio'] ?></small></p>
             <p class="card-text text-center">
@@ -27,3 +29,9 @@ require_once("./db/Connection.php");
         </div>
     </div>
 </div>
+
+
+
+<?php
+require_once("./includes/footer.php");
+?>

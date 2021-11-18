@@ -19,9 +19,6 @@ require_once("./db/Connection.php");
     </div>
     <table class="table table-striped table-hover text-center">
         <thead>
-
-
-
         <tr >
             <th>ID</th>
             <th>Name</th>
@@ -37,6 +34,7 @@ require_once("./db/Connection.php");
                 <td><?php echo $row['nickname'] ?></td>
                 <td><?php echo $row['user_skill'] ?></td>
                 <td><?php echo $row['user_address'] ?></td>
+
                 <td >
                     <a href="edit.php?id=<?php echo $row['id']; ?>" class="btn btn-primary a-btn-slide-text">
                         <span class="edit" aria-hidden="true"></span>
@@ -55,12 +53,14 @@ require_once("./db/Connection.php");
         <?php } ?>
 
 
-
         </tbody>
     </table>
 </div>
-</body>
-</html>
+
+
+<?php
+require_once("./includes/footer.php");
+?>
 
 
 
@@ -75,17 +75,3 @@ require_once("./db/Connection.php");
 
 
 
-
-
-
-<!-- Optional JavaScript; choose one of the two! -->
-
-<!-- Option 1: Bootstrap Bundle with Popper -->
-<script src="./js/bootstrap.bundle.min.js"></script>
-<!-- Option 2: Separate Popper and Bootstrap JS -->
-
-<script src="./js/popper.min.js"> </script>
-<script src="./js/bootstrap.min.js" ></script>
-
-</body>
-</html>
