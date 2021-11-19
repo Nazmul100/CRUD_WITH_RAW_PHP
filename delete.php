@@ -5,16 +5,11 @@ $id = $_GET['id'];
 $getData = new database();
 $data = $getData->Delete($id);
 
-if ($data==1){
+if ($data == 1) {
     header('location:index.php');
 }
 
 ?>
-
-
-
-
-
 
 
 <?php

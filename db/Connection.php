@@ -9,6 +9,7 @@ class database
     private $dbname = 'crud';
     private $result = array();
     private $mysqli = '';
+
     //// Create database connection using construct method
     public function __construct()
     {
@@ -22,7 +23,7 @@ class database
 //        return $this->mysqli->query($sql);
 //    }
 
-     //this method data throw database table
+    //this method data throw database table
     public function insert($username, $photo, $bio, $skill, $project, $address)
     {
 
@@ -42,12 +43,14 @@ class database
             }
         }
     }
-     // this function get data from database table and show index page
+
+    // this function get data from database table and show index page
     public function showAll()
     {
         $sql = "SELECT * FROM  user_details";
         return $this->mysqli->query($sql);
     }
+
     // this function  view information
     public function Display($id)
     {
@@ -63,20 +66,25 @@ class database
 
     public function Update($id, $username, $photo, $bio, $skill, $project, $address)
     {
-        $allow = array('jpg', 'jpeg', 'png');
-        $exntension = explode('.', $photo['name']);
-        $fileActExt = strtolower(end($exntension));
-        $fileNew = rand() . "." . $fileActExt;  // rand function create the rand number
-        $filePath = 'Images/' . $fileNew;
-
-        if (in_array($fileActExt, $allow)) {
-            if ($photo['size'] > 0 && $photo['error'] == 0) {
-                if (move_uploaded_file($photo['tmp_name'], $filePath)) {
-                    $sql = "UPDATE user_details 
+        if (@is_array(getimagesize($photo))) {
+            $allow = array('jpg', 'jpeg', 'png');
+            $exntension = explode('.', $photo['name']);
+            $fileActExt = strtolower(end($exntension));
+            $fileNew = rand() . "." . $fileActExt;  // rand function create the rand number
+            $filePath = 'Images/' . $fileNew;
+            if (in_array($fileActExt, $allow)) {
+                if ($photo['size'] > 0 && $photo['error'] == 0) {
+                    if (move_uploaded_file($photo['tmp_name'], $filePath)) {
+                        $sql = "UPDATE user_details 
              SET nickname = '$username', user_photo = '$fileNew', user_bio = '$bio', user_skill = '$skill', user_project = '$project', user_address = '$address' WHERE id = '$id'";
-                    return $this->mysqli->query($sql);
+                        return $this->mysqli->query($sql);
+                    }
                 }
             }
+        } else {
+            $sql = "UPDATE user_details 
+             SET nickname = '$username',  user_bio = '$bio', user_skill = '$skill', user_project = '$project', user_address = '$address' WHERE id = '$id'";
+            return $this->mysqli->query($sql);
         }
 
 
